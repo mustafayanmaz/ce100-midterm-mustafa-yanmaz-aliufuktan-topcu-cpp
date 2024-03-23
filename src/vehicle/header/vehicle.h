@@ -14,6 +14,9 @@ struct Vehicle {
     string insuranceInfo;
 };
 
-void manageVehicleDetails(vector<Vehicle>& vehicles);
+void addVehicle(vector<Vehicle>& vehicles);
+void displayVehicles(const vector<Vehicle>& vehicles);
+void updateVehicle(vector<Vehicle>& vehicles);
+void deleteVehicle(vector<Vehicle>& vehicles);
 
 #endif

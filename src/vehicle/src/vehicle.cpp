@@ -1,12 +1,12 @@
 #include "vehicle.h"
 #include <iostream>
-#include <conio.h> // This library is necessary for using getch() function (for Windows)
+#include <conio.h>
 
 using namespace std;
 
 // Function to add a new vehicle
 void addVehicle(vector<Vehicle>& vehicles) {
-    system("cls"); // Clear the screen (for Windows)
+    system("cls");
 
     Vehicle vehicle;
 
@@ -19,7 +19,7 @@ void addVehicle(vector<Vehicle>& vehicles) {
     cout << "Enter Year: ";
     cin >> vehicle.year;
 
-    cin.ignore(); // Ignore newline character left in the input buffer
+    cin.ignore();
 
     cout << "Enter Insurance Info: ";
     getline(cin, vehicle.insuranceInfo);
@@ -28,12 +28,12 @@ void addVehicle(vector<Vehicle>& vehicles) {
 
     cout << "Vehicle added successfully!" << endl;
     cout << "Press any key to continue..." << endl;
-    _getch(); // Wait for the user to press any key (for Windows)
+    _getch();
 }
 
 // Function to display all vehicles
 void displayVehicles(const vector<Vehicle>& vehicles) {
-    system("cls"); // Clear the screen (for Windows)
+    system("cls");
 
     if (vehicles.empty()) {
         cout << "No vehicles found!" << endl;
@@ -50,58 +50,78 @@ void displayVehicles(const vector<Vehicle>& vehicles) {
     }
 
     cout << "Press any key to continue..." << endl;
-    _getch(); // Wait for the user to press any key (for Windows)
+    _getch();
 }
 
-// Function to manage vehicle details (add, update, delete)
-void manageVehicleDetails(vector<Vehicle>& vehicles) {
-    int currentSelection = 1;
+// Function to update vehicle details
+void updateVehicle(vector<Vehicle>& vehicles) {
+    system("cls");
 
-    while (true) {
-        system("cls"); // Clear the screen (for Windows)
-        cout << "------ Manage Vehicle Details ------" << endl;
-        cout << (currentSelection == 1 ? "> " : "  ") << "1. Add Vehicle" << endl;
-        cout << (currentSelection == 2 ? "> " : "  ") << "2. Update Vehicle" << endl;
-        cout << (currentSelection == 3 ? "> " : "  ") << "3. Delete Vehicle" << endl;
-        cout << (currentSelection == 4 ? "> " : "  ") << "4. View Vehicles" << endl;
-        cout << (currentSelection == 5 ? "> " : "  ") << "5. Back to Main Menu" << endl;
-        cout << "------------------------------------" << endl;
-
-        int key = _getch(); // Get the key pressed by the user (for Windows)
-
-        switch (key) {
-        case 72: // Up arrow key
-            if (currentSelection > 1)
-                currentSelection--;
-            break;
-        case 80: // Down arrow key
-            if (currentSelection < 5)
-                currentSelection++;
-            break;
-        case 13: // Enter key
-            switch (currentSelection) {
-            case 1:
-                addVehicle(vehicles);
-                break;
-            case 2:
-                // Call update vehicle function
-                cout << "Update Vehicle functionality not implemented yet!" << endl;
-                cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
-                break;
-            case 3:
-                // Call delete vehicle function
-                cout << "Delete Vehicle functionality not implemented yet!" << endl;
-                cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
-                break;
-            case 4:
-                displayVehicles(vehicles);
-                break;
-            case 5:
-                return; // Exit the function
-            }
-            break;
-        }
+    if (vehicles.empty()) {
+        cout << "No vehicles found!" << endl;
+        cout << "Press any key to continue..." << endl;
+        _getch();
+        return;
     }
+
+    int selection;
+    cout << "Select the vehicle to update (Enter vehicle number): ";
+    cin >> selection;
+
+    if (selection <= 0 || selection > vehicles.size()) {
+        cout << "Invalid selection!" << endl;
+        cout << "Press any key to continue..." << endl;
+        _getch();
+        return;
+    }
+
+    Vehicle& vehicle = vehicles[selection - 1];
+
+    cout << "Enter Make: ";
+    cin.ignore();
+    getline(cin, vehicle.make);
+
+    cout << "Enter Model: ";
+    getline(cin, vehicle.model);
+
+    cout << "Enter Year: ";
+    cin >> vehicle.year;
+
+    cin.ignore();
+
+    cout << "Enter Insurance Info: ";
+    getline(cin, vehicle.insuranceInfo);
+
+    cout << "Vehicle details updated successfully!" << endl;
+    cout << "Press any key to continue..." << endl;
+    _getch();
+}
+
+// Function to delete a vehicle
+void deleteVehicle(vector<Vehicle>& vehicles) {
+    system("cls");
+
+    if (vehicles.empty()) {
+        cout << "No vehicles found!" << endl;
+        cout << "Press any key to continue..." << endl;
+        _getch();
+        return;
+    }
+
+    int selection;
+    cout << "Select the vehicle to delete (Enter vehicle number): ";
+    cin >> selection;
+
+    if (selection <= 0 || selection > vehicles.size()) {
+        cout << "Invalid selection!" << endl;
+        cout << "Press any key to continue..." << endl;
+        _getch();
+        return;
+    }
+
+    vehicles.erase(vehicles.begin() + selection - 1);
+
+    cout << "Vehicle deleted successfully!" << endl;
+    cout << "Press any key to continue..." << endl;
+    _getch();
 }
