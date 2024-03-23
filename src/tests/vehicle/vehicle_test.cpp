@@ -91,7 +91,49 @@ TEST_F(DisplayVehiclesTest, DisplayVehiclesOutput) {
     // Compare the expected output with the actual output
     ASSERT_EQ(testing_stream.str(), expected_output);
 }
+void updateVehicle(std::vector<Vehicle>& vehicles);
 
+// Test case for updateVehicle function
+TEST(UpdateVehicleTest, UpdatesVehicleSuccessfully) {
+    // Create a test vector of vehicles
+    std::vector<Vehicle> test_vehicles = {
+        {"Toyota", "Camry", 2015, "ABC123"},
+        {"Honda", "Accord", 2018, "DEF456"}
+    };
+
+    // Prepare input stream
+    std::stringstream input_stream;
+    input_stream << "1\n" // Selecting the first vehicle
+        << "Updated Make\n"
+        << "Updated Model\n"
+        << "2022\n"
+        << "Updated Insurance\n";
+
+    // Redirect cin and cout
+    std::stringstream output_stream;
+    std::streambuf* orig_cin = std::cin.rdbuf(input_stream.rdbuf());
+    std::streambuf* orig_cout = std::cout.rdbuf(output_stream.rdbuf());
+
+    // Call the function to be tested
+    updateVehicle(test_vehicles);
+
+    // Restore cin and cout
+    std::cin.rdbuf(orig_cin);
+    std::cout.rdbuf(orig_cout);
+
+    // Check if the vehicle details are updated correctly
+    ASSERT_EQ("Updated Make", test_vehicles[0].make);
+    ASSERT_EQ("Updated Model", test_vehicles[0].model);
+    ASSERT_EQ(2022, test_vehicles[0].year);
+    ASSERT_EQ("Updated Insurance", test_vehicles[0].insuranceInfo);
+
+    // Check if the output stream contains the expected message
+    std::string expected_output =
+        "Select the vehicle to update (Enter vehicle number): "
+        "Enter Make: Enter Model: Enter Year: Enter Insurance Info: "
+        "Vehicle details updated successfully!\nPress Enter to continue...\n";
+    ASSERT_EQ(expected_output, output_stream.str());
+}
 // Main function to run all the tests
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
