@@ -134,6 +134,43 @@ TEST(UpdateVehicleTest, UpdatesVehicleSuccessfully) {
         "Vehicle details updated successfully!\nPress Enter to continue...\n";
     ASSERT_EQ(expected_output, output_stream.str());
 }
+void deleteVehicle(std::vector<Vehicle>& vehicles);
+
+// Test case for deleteVehicle function
+TEST(DeleteVehicleTest, DeletesVehicleSuccessfully) {
+    // Create a test vector of vehicles
+    std::vector<Vehicle> test_vehicles = {
+        {"Toyota", "Camry", 2015, "ABC123"},
+        {"Honda", "Accord", 2018, "DEF456"}
+    };
+
+    // Prepare input stream
+    std::stringstream input_stream;
+    input_stream << "2\n"; // Selecting the second vehicle
+
+    // Redirect cin and cout
+    std::stringstream output_stream;
+    std::streambuf* orig_cin = std::cin.rdbuf(input_stream.rdbuf());
+    std::streambuf* orig_cout = std::cout.rdbuf(output_stream.rdbuf());
+
+    // Call the function to be tested
+    deleteVehicle(test_vehicles);
+
+    // Restore cin and cout
+    std::cin.rdbuf(orig_cin);
+    std::cout.rdbuf(orig_cout);
+
+    // Check if the vehicle is deleted successfully
+    ASSERT_EQ(1, test_vehicles.size());
+    ASSERT_EQ("Toyota", test_vehicles[0].make);
+
+    // Check if the output stream contains the expected message
+    std::string expected_output =
+        "Select the vehicle to delete (Enter vehicle number): "
+        "Vehicle deleted successfully!\nPress Enter to continue...\n";
+    ASSERT_EQ(expected_output, output_stream.str());
+}
+
 // Main function to run all the tests
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
