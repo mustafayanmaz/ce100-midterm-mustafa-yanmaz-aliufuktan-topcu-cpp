@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h> // This library is necessary for using getch() function (for Windows)
+#include "vehicle.h"
 
 using namespace std;
 
@@ -18,10 +19,12 @@ void showMenu(int currentSelection) {
 }
 
 int main() {
-    int currentSelection = 1; // Initially selected option
+    vector<Vehicle> vehicles;
+
+    int currentSelection = 1;
 
     while (true) {
-        showMenu(currentSelection); // Display the menu with current selection
+        showMenu(currentSelection);
 
         int key = _getch(); // Get the key pressed by the user (for Windows)
 
@@ -37,38 +40,14 @@ int main() {
         case 13: // Enter key
             switch (currentSelection) {
             case 1:
-                // Call Manage Vehicle Details method
-                cout << "Manage Vehicle Details method has not been added yet!" << endl;
-                cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
+                manageVehicleDetails(vehicles);
                 break;
             case 2:
                 // Call Mileage Tracker method
                 cout << "Mileage Tracker method has not been added yet!" << endl;
                 cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
-                break;
-            case 3:
-                // Call Fuel Log method
-                cout << "Fuel Log method has not been added yet!" << endl;
-                cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
-                break;
-                //break break
-            case 4:
-                // Call Service Reminders method
-                cout << "Service Reminders method has not been added yet!" << endl;
-                cout << "Press any key to continue..." << endl;
-                _getch(); // Wait for the user to press any key (for Windows)
-                break;
-                //break break
-            case 5:
-                cout << "Exiting the program..." << endl;
-                return 0; // Exit the program
+                _getch(); // Wait for the
             }
-            break;
         }
     }
-
-    return 0;
 }
