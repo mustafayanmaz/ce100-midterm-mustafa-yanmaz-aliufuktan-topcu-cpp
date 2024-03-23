@@ -44,8 +44,9 @@ void displayVehicles(const vector<Vehicle>& vehicles) {
         }
     }
 
-    cout << "Press any key to continue..." << endl;
-    _getch();
+    cout << "Press Enter to continue..." << endl;
+    cin.ignore();
+    cin.get();
 }
 
 // Function to update vehicle details
@@ -54,8 +55,9 @@ void updateVehicle(vector<Vehicle>& vehicles) {
 
     if (vehicles.empty()) {
         cout << "No vehicles found!" << endl;
-        cout << "Press any key to continue..." << endl;
-        _getch();
+        cout << "Press Enter to continue..." << endl;
+        cin.ignore();
+        cin.get();
         return;
     }
 
@@ -65,8 +67,9 @@ void updateVehicle(vector<Vehicle>& vehicles) {
 
     if (selection <= 0 || selection > vehicles.size()) {
         cout << "Invalid selection!" << endl;
-        cout << "Press any key to continue..." << endl;
-        _getch();
+        cout << "Press Enter to continue..." << endl;
+        cin.ignore();
+        cin.get();
         return;
     }
 
@@ -88,8 +91,9 @@ void updateVehicle(vector<Vehicle>& vehicles) {
     getline(cin, vehicle.insuranceInfo);
 
     cout << "Vehicle details updated successfully!" << endl;
-    cout << "Press any key to continue..." << endl;
-    _getch();
+    cout << "Press Enter to continue..." << endl;
+    cin.ignore();
+    cin.get();
 }
 
 // Function to delete a vehicle
@@ -98,8 +102,9 @@ void deleteVehicle(vector<Vehicle>& vehicles) {
 
     if (vehicles.empty()) {
         cout << "No vehicles found!" << endl;
-        cout << "Press any key to continue..." << endl;
-        _getch();
+        cout << "Press Enter to continue..." << endl;
+        cin.ignore();
+        cin.get();
         return;
     }
 
@@ -109,14 +114,16 @@ void deleteVehicle(vector<Vehicle>& vehicles) {
 
     if (selection <= 0 || selection > vehicles.size()) {
         cout << "Invalid selection!" << endl;
-        cout << "Press any key to continue..." << endl;
-        _getch();
+        cout << "Press Enter to continue..." << endl;
+        cin.ignore();
+        cin.get();
         return;
     }
 
     vehicles.erase(vehicles.begin() + selection - 1);
 
     cout << "Vehicle deleted successfully!" << endl;
-    cout << "Press any key to continue..." << endl;
-    _getch();
+    cout << "Press Enter to continue..." << endl;
+    cin.ignore();
+    cin.get();
 }

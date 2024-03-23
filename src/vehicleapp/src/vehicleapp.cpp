@@ -1,6 +1,8 @@
 #include <iostream>
 #include <conio.h>
 #include "vehicle.h"
+#include <vector>
+#include <limits> // numeric_limits kullanmak için
 
 using namespace std;
 
@@ -103,6 +105,16 @@ void manageVehicleDetails(vector<Vehicle>& vehicles) {
 }
 
 
+#include <iostream>
+#include <vector>
+#include "vehicle.h" // Vehicle struct ve diðer fonksiyonlarý içeren baþlýk dosyasý
+
+using namespace std;
+
+// Diðer fonksiyonlarýn prototipleri
+void showMenu(int currentSelection);
+void manageVehicleDetails(vector<Vehicle>& vehicles);
+
 int main() {
     vector<Vehicle> vehicles;
 
@@ -151,6 +163,4 @@ int main() {
             }
         }
     }
-
-    return 0;
 }

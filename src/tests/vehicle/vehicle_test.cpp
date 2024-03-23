@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include "vehicle.h" // Assuming vehicle.h contains the definition of the Vehicle class
+#include <iostream>
+#include <sstream>
 
 
 // Test fixture for testing addVehicle function
@@ -36,6 +38,59 @@ TEST(AddVehicleTest, AddVehicleSuccessfully) {
     ASSERT_EQ("Enter Make: Enter Model: Enter Year: Enter Insurance Info: Vehicle added successfully!\n", output_stream.str());
 }
 
+
+// Define a testing fixture for displayVehicles function
+class DisplayVehiclesTest : public ::testing::Test {
+protected:
+    // Define test setup
+    void SetUp() override {
+
+        // Redirect cout to a stringstream
+        testing_stream.str(""); // Clear the stream
+        original_cout_buffer = std::cout.rdbuf(); // Save the original buffer
+        std::cout.rdbuf(testing_stream.rdbuf()); // Redirect cout to testing_stream
+    }
+
+    // Define test teardown
+    void TearDown() override {
+        // Restore the original cout buffer
+        std::cout.rdbuf(original_cout_buffer);
+    }
+
+    // Define variables for testing
+    std::stringstream testing_stream; // Stream to capture output
+    std::streambuf* original_cout_buffer; // Original cout buffer
+};
+
+// Test case for displayVehicles function
+TEST_F(DisplayVehiclesTest, DisplayVehiclesOutput) {
+    // Create some test vehicles
+    std::vector<Vehicle> test_vehicles = {
+        {"Toyota", "Camry", 2020, "ABC123"},
+        {"Honda", "Accord", 2019, "DEF456"}
+    };
+
+    // Call the function to be tested
+    displayVehicles(test_vehicles);
+
+    // Define the expected output
+    std::string expected_output =
+        "---- Vehicle List ----\n"
+        "Vehicle 1:\n"
+        "Make: Toyota\n"
+        "Model: Camry\n"
+        "Year: 2020\n"
+        "Insurance Info: ABC123\n\n"
+        "Vehicle 2:\n"
+        "Make: Honda\n"
+        "Model: Accord\n"
+        "Year: 2019\n"
+        "Insurance Info: DEF456\n\n"
+        "Press Enter to continue...\n";
+
+    // Compare the expected output with the actual output
+    ASSERT_EQ(testing_stream.str(), expected_output);
+}
 
 // Main function to run all the tests
 int main(int argc, char** argv) {
