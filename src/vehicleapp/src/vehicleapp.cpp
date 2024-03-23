@@ -65,7 +65,7 @@ void manageVehicleDetails(vector<Vehicle>& vehicles) {
                     case 13:
                         switch (manageSelection) {
                         case 1:
-                            //addVehicle(vehicles);
+                            addVehicle(vehicles, std::cin, std::cout); // Pass std::cin and std::cout
                             break;
                         case 2:
                             updateVehicle(vehicles);
