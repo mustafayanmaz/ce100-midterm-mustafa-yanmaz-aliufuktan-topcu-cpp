@@ -3,20 +3,19 @@
 
 #include <vector>
 #include <string>
-
-using namespace std;
+#include <iostream> // Include for istream and ostream
 
 // Structure to hold vehicle details
 struct Vehicle {
-    string make;
-    string model;
+    std::string make;
+    std::string model;
     int year;
-    string insuranceInfo;
+    std::string insuranceInfo;
 };
 
-void addVehicle(vector<Vehicle>& vehicles);
-void displayVehicles(const vector<Vehicle>& vehicles);
-void updateVehicle(vector<Vehicle>& vehicles);
-void deleteVehicle(vector<Vehicle>& vehicles);
+void addVehicle(std::vector<Vehicle>& vehicles, std::istream& input_stream, std::ostream& output_stream);
+void displayVehicles(const std::vector<Vehicle>& vehicles);
+void updateVehicle(std::vector<Vehicle>& vehicles);
+void deleteVehicle(std::vector<Vehicle>& vehicles);
 
 #endif

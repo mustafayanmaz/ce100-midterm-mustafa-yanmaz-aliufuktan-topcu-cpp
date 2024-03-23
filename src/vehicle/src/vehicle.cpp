@@ -5,30 +5,25 @@
 using namespace std;
 
 // Function to add a new vehicle
-void addVehicle(vector<Vehicle>& vehicles) {
-    system("cls");
-
+void addVehicle(std::vector<Vehicle>& vehicles, std::istream& input_stream = std::cin, std::ostream& output_stream = std::cout) {
     Vehicle vehicle;
 
-    cout << "Enter Make: ";
-    getline(cin, vehicle.make);
+    output_stream << "Enter Make: ";
+    std::getline(input_stream, vehicle.make);
 
-    cout << "Enter Model: ";
-    getline(cin, vehicle.model);
+    output_stream << "Enter Model: ";
+    std::getline(input_stream, vehicle.model);
 
-    cout << "Enter Year: ";
-    cin >> vehicle.year;
+    output_stream << "Enter Year: ";
+    input_stream >> vehicle.year;
+    input_stream.ignore();
 
-    cin.ignore();
-
-    cout << "Enter Insurance Info: ";
-    getline(cin, vehicle.insuranceInfo);
+    output_stream << "Enter Insurance Info: ";
+    std::getline(input_stream, vehicle.insuranceInfo);
 
     vehicles.push_back(vehicle);
 
-    cout << "Vehicle added successfully!" << endl;
-    cout << "Press any key to continue..." << endl;
-    _getch();
+    output_stream << "Vehicle added successfully!" << std::endl;
 }
 
 // Function to display all vehicles

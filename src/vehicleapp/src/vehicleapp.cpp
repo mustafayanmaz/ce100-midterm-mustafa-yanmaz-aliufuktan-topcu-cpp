@@ -65,7 +65,7 @@ void manageVehicleDetails(vector<Vehicle>& vehicles) {
                     case 13:
                         switch (manageSelection) {
                         case 1:
-                            addVehicle(vehicles);
+                            //addVehicle(vehicles);
                             break;
                         case 2:
                             updateVehicle(vehicles);
